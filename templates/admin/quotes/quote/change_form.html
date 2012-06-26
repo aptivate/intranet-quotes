@@ -1,0 +1,7 @@
+{% extends "admin/change_form.html" %}
+
+{% block submit_buttons %}
+	<input type="submit" value="Save and Promote" class="default" name="_promote"
+		{{ buttons.onclick_attrib }} />
+	{{ block.super }}
+{% endblock %}
