@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime
 
+# http://stackoverflow.com/a/1383402
 class ClassProperty(property):
     def __get__(self, cls, owner):
         return self.fget.__get__(None, owner)()
