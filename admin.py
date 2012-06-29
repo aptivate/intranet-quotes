@@ -2,6 +2,8 @@ import django.contrib.admin
 import models
 
 class QuoteAdmin(django.contrib.admin.ModelAdmin):
+    list_display = ('quote', 'by')
+    
     def save_model(self, request, obj, form, change):
         """
         Given a model instance save it to the database.

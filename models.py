@@ -21,3 +21,6 @@ class Quote(models.Model):
             return None
         else:
             return found[0]
+        
+    def __unicode__(self):
+        return self.quote

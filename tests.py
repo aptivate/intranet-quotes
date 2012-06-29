@@ -67,3 +67,25 @@ class QuotesTest(AptivateEnhancedTestCase):
         quote = Quote.latest
         self.assertIsNotNone(quote.promoted)
         self.assertNotEqual('', quote.promoted)
+        
+    def test_quote_object_admin_changelist_columns(self):
+        self.login()
+
+        foo = Quote(quote="Foo", by="Bar")
+        foo.save()
+
+        response = self.client.get(reverse('admin:quotes_quote_changelist'))
+        self.assert_changelist_not_admin_form_with_errors(response)
+        
+        # import pdb; pdb.set_trace()
+
+        changelist = response.context['cl']
+        columns = changelist.list_display
+        self.assertEqual('quote', columns[1])
+        self.assertEqual('by', columns[2])
+        
+        # from django.contrib.admin.templatetags.admin_list import items_for_result 
+        # column_values = items_for_result(changelist, foo, None)
+        # from django.contrib.admin.util import lookup_field
+        # f, attr, value = lookup_field(columns[1], foo, changelist.model_admin)
+        # self.assertEquals(foo.quote, value)
